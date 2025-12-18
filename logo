@@ -1,0 +1,208 @@
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Shining Neon Wire</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #111;
+        }
+
+        svg {
+            width: 95vw;
+            max-width: 1200px;
+        }
+
+        /* العناصر الكهربائية (نجمة، سلك، علبة، فيشة) */
+        .wire,
+        .wire-head,
+        .neon-line-electric,
+        .neon-fill-electric,
+        .plug-line,
+        .plug-fill {
+            stroke: #ffdd4a;
+            fill: none;
+            opacity: 0.05;
+            filter: none;
+            stroke-width: 5;
+            animation: powerOn 1.2s ease-out 4.5s forwards;
+        }
+
+        .neon-fill-electric,
+        .plug-fill {
+            fill: #ffdd4a;
+            stroke-width: 3;
+        }
+
+        /* الكلمة Shining */
+        .neon-text {
+            stroke: #ffdd4a;
+            stroke-width: 4;
+            font-family: 'Pacifico', cursive;
+            fill: none;
+            opacity: 0;
+            filter: none;
+            animation: textGlow 1.6s ease-in-out 4.5s infinite alternate;
+        }
+
+        /* رأس السلك */
+        .wire-head {
+            fill: #ffdd4a;
+            stroke-width: 4;
+            r: 7;
+        }
+
+        /* حركة الفيشة الجديدة */
+        .plug {
+            animation: plugMove 1s ease-out 3s forwards;
+        }
+
+        @keyframes plugMove {
+            from {
+                transform: translate(900px,230px) scale(-1,1);
+            }
+
+            to {
+                transform: translate(940px,230px) scale(-1,1);
+            }
+        }
+
+        /* الشرارة */
+        .spark {
+            stroke: #fff7b0;
+            stroke-width: 4;
+            opacity: 0;
+            fill: none;
+            filter: drop-shadow(0 0 10px #fff7b0);
+            animation: sparkAnim 1s ease-out 3.8s forwards;
+        }
+
+        /* ----------------------------
+           ANIMATIONS
+        -----------------------------*/
+
+        @keyframes powerOn {
+            0% {
+                opacity: 0.05;
+                filter: none;
+            }
+
+            40% {
+                opacity: 0.4;
+                filter: drop-shadow(0 0 6px #ffdd4a);
+            }
+
+            70% {
+                opacity: 0.8;
+                filter: drop-shadow(0 0 14px #ffdd4a);
+            }
+
+            100% {
+                opacity: 1;
+                filter: drop-shadow(0 0 22px #fff7b0);
+            }
+        }
+
+        @keyframes textGlow {
+            0% {
+                opacity: 0;
+                filter: none;
+            }
+
+            30% {
+                opacity: 0.6;
+                filter: drop-shadow(0 0 6px #ffdd4a);
+            }
+
+            100% {
+                opacity: 1;
+                filter: drop-shadow(0 0 20px #fff7b0);
+            }
+        }
+
+        @keyframes sparkAnim {
+            0% {
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            75% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <svg viewBox="0 0 1400 400">
+
+        <!-- ⭐ النجمة -->
+        <polygon class="neon-line-electric"
+                 points="150,70 175,130 235,140 185,175 200,230 150,200 100,230 115,175 65,140 125,130">
+        </polygon>
+
+        <!-- سلك من النجمة -->
+        <path class="neon-line-electric" d="M150 155
+        Q200 200 260 220
+        Q300 230 320 210">
+        </path>
+
+        <!-- كلمة Shining -->
+        <text x="320" y="220" class="neon-text" font-size="90">Shining</text>
+
+        <!-- السلك بعد الكلمة -->
+        <path class="wire" d="
+        M580 230
+        Q680 260 760 245
+        Q830 230 860 235
+    "></path>
+
+        <!-- رأس السلك -->
+        <circle class="wire-head" cx="860" cy="235"></circle>
+
+        <!-- الفيشة (تتحرك نحو العلبة الآن) -->
+        <g class="plug" transform="translate(900,230) scale(-1,1)">
+            <rect x="0" y="-30" width="70" height="55" rx="8" class="plug-fill"></rect>
+
+            <line x1="-35" y1="-10" x2="0" y2="-10" class="plug-line"></line>
+            <line x1="-35" y1="0" x2="0" y2="0" class="plug-line"></line>
+            <line x1="-35" y1="10" x2="0" y2="10" class="plug-line"></line>
+        </g>
+
+        <!-- العلبة الكهربائية -->
+        <g transform="translate(900,190)">
+            <rect x="0" y="0" width="90" height="90" rx="12" class="neon-fill-electric"></rect>
+
+            <circle cx="30" cy="35" r="7" class="neon-line-electric"></circle>
+            <circle cx="60" cy="35" r="7" class="neon-line-electric"></circle>
+
+            <rect x="38" y="55" width="14" height="4" class="neon-line-electric"></rect>
+        </g>
+
+        <!-- الشرارة -->
+        <g transform="translate(980,225)">
+            <path class="spark" d="M0 0 L10 -8 L20 2 L30 -6 L40 4"></path>
+        </g>
+
+    </svg>
+
+</body>
+</html>
